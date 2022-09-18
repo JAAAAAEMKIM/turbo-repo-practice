@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PnpWebpackPlugin = require(`pnp-webpack-plugin`);
 const path = require('path');
 
 const mode = process.env.NODE_ENV || 'development';
@@ -13,7 +14,10 @@ module.exports = {
 			svelte: path.dirname(require.resolve('svelte/package.json'))
 		},
 		extensions: ['.mjs', '.js', '.svelte'],
-		mainFields: ['svelte', 'browser', 'module', 'main']
+		mainFields: ['svelte', 'browser', 'module', 'main'],
+		plugins: [
+			PnpWebpackPlugin,
+		],
 	},
 	output: {
 		path: path.join(__dirname, '/public'),
@@ -57,6 +61,11 @@ module.exports = {
 			filename: '[name].css'
 		})
 	],
+	resolveLoader: {
+		plugins: [
+			PnpWebpackPlugin.moduleLoader(module),
+		],
+	},
 	devtool: prod ? false : 'source-map',
 	devServer: {
 		hot: true
