@@ -1,12 +1,11 @@
-<script> // 의존성이 제대로 resolve 되지 않음. -> pnp확인 필요
-	import dayjs from 'dayjs'; 
+<script>
+import * as dayjs from 'dayjs'
 	export let name;
 	let todos = [];
 	let value = '';
 
 	const handleClick = () => {
-		console.log({value})
-		todos = [...todos, `${value}, ${dayjs.now()}`];
+		todos = [...todos, `${value}, ${dayjs().format()}`];
 		value = ''
 	}
 </script>
